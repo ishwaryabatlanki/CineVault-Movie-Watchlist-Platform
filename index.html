@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CineVault — a cinematic movie discovery and personal watchlist platform." />
+  <title>CineVault — Discover. Save. Watch.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="/" aria-label="CineVault home">
+      <span class="brand-mark">C</span>
+      <span>CINE<span>VAULT</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="#discover" class="nav-link">Discover</a>
+      <a href="#watchlist" class="nav-link">Watchlist <b id="watchCount">0</b></a>
+    </nav>
+
+    <div class="header-actions">
+      <form class="search" id="searchForm">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Search movies..." autocomplete="off" />
+      </form>
+      <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-backdrop" id="heroBackdrop"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> FEATURED TONIGHT</p>
+        <h1 id="heroTitle">Loading...</h1>
+        <div class="hero-meta" id="heroMeta"></div>
+        <p class="hero-description" id="heroDescription"></p>
+        <div class="hero-buttons">
+          <button class="primary-btn" id="heroDetails">View Details <span>→</span></button>
+          <button class="ghost-btn" id="heroWatch">+ Add to Watchlist</button>
+        </div>
+      </div>
+      <div class="hero-progress" id="heroProgress"></div>
+    </section>
+
+    <section class="content-section" id="recommendations">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">CURATED FOR YOU</p>
+          <h2>Recommended <span>Movies</span></h2>
+        </div>
+        <button class="text-btn" data-scroll-target="recommendationGrid">View all →</button>
+      </div>
+      <div class="movie-row" id="recommendationGrid"></div>
+    </section>
+
+    <section class="content-section" id="discover">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">EXPLORE THE CATALOGUE</p>
+          <h2>Discover <span>Something Great</span></h2>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="genre-pills" id="genrePills">
+          <button class="pill active" data-genre="">All</button>
+          <button class="pill" data-genre="28">Action</button>
+          <button class="pill" data-genre="35">Comedy</button>
+          <button class="pill" data-genre="18">Drama</button>
+          <button class="pill" data-genre="878">Sci-Fi</button>
+          <button class="pill" data-genre="53">Thriller</button>
+          <button class="pill" data-genre="27">Horror</button>
+        </div>
+        <div class="filter-right">
+          <label class="rating-control">
+            <span>Rating <strong id="ratingValue">0+</strong></span>
+            <input id="ratingSlider" type="range" min="0" max="9" step="0.5" value="0" />
+          </label>
+          <select id="sortSelect" aria-label="Sort movies">
+            <option value="popularity.desc">Most Popular</option>
+            <option value="vote_average.desc">Top Rated</option>
+            <option value="primary_release_date.desc">Newest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="status" id="discoverStatus"></div>
+      <div class="movie-grid" id="discoverGrid"></div>
+      <button class="load-more" id="loadMore">Load more movies</button>
+    </section>
+
+    <section class="content-section watch-section" id="watchlist">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">YOUR PERSONAL LIBRARY</p>
+          <h2>My <span>Watchlist</span></h2>
+        </div>
+        <span class="watch-note">Saved in this browser</span>
+      </div>
+      <div class="movie-grid" id="watchlistGrid"></div>
+      <div class="empty-state" id="watchEmpty">
+        <div class="empty-icon">♡</div>
+        <h3>Your watchlist is waiting</h3>
+        <p>Save movies you want to watch later and they'll appear here.</p>
+        <a href="#discover" class="primary-btn small">Discover movies</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">CINE<span>VAULT</span></div>
+    <p>Built with HTML, CSS, JavaScript & TMDB API.</p>
+    <p class="footer-credit">Movie data provided by TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <article class="movie-modal" id="movieModal">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-backdrop-image" id="modalImage"></div>
+      <div class="modal-info">
+        <p class="section-kicker">MOVIE DETAILS</p>
+        <h2 id="modalTitle"></h2>
+        <div class="modal-meta" id="modalMeta"></div>
+        <p id="modalOverview"></p>
+        <div class="modal-actions">
+          <button class="primary-btn" id="modalWatch">+ Add to Watchlist</button>
+          <button class="ghost-btn" id="modalTrailer">▶ Watch Trailer</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="/script.js"></script>
+</body>
+</html>
