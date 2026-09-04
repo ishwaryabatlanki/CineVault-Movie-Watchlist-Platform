@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in to CineVault." />
+  <title>Login | CineVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/login.css" />
+</head>
+<body>
+  <main class="login-page">
+    <a class="brand" href="/" aria-label="CineVault home">
+      <span class="brand-mark">C</span>
+      <span>CINE<span>VAULT</span></span>
+    </a>
+
+    <section class="login-card" aria-labelledby="loginTitle">
+      <p class="eyebrow">WELCOME BACK</p>
+      <h1 id="loginTitle">Sign in to <span>CineVault</span></h1>
+      <p class="subtitle">Enter your TMDB account details to continue to your movie dashboard.</p>
+
+      <form id="loginForm" novalidate>
+        <label for="username">TMDB Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" placeholder="Enter your TMDB username" required />
+
+        <label for="password">Password</label>
+        <div class="password-wrap">
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+          <button type="button" id="togglePassword" aria-label="Show password">Show</button>
+        </div>
+
+        <p class="form-message" id="formMessage" aria-live="polite"></p>
+        <button class="login-btn" type="submit">Continue to CineVault <span>→</span></button>
+      </form>
+
+      <p class="back-link"><a href="/">← Back to movie discovery</a></p>
+    </section>
+
+    <p class="footer-note">CineVault · Movie discovery and personal watchlists</p>
+  </main>
+
+  <script src="/login.js"></script>
+</body>
+</html>
